@@ -1,0 +1,54 @@
+def decorator_function(original_function):# decorator function
+    def wrapper_function():# wrapper function
+        print('before the orginal function runs \n')
+        original_function()
+        print('after the original function runs \n')
+    return wrapper_function
+
+def original_function():# original function that should not be modified 
+    print ('Dont change this function \n')
+
+original_function()
+original_function_decorated=decorator_function(original_function)
+original_function_decorated()
+
+@decorator_function 
+def another_original_function():
+    print('Dont change this function as well \n')
+
+another_original_function()
+
+def Sandwich1(patty):
+    def wrapper():
+        print('bread')
+        patty()
+        print('bread')
+    return wrapper
+
+def Sandwich2(patty):
+    def wrapper():
+        print('tomatoes')
+        patty()
+        print('lettuce')
+    return wrapper
+
+@Sandwich1
+@Sandwich2
+def patty():
+    print('Ham')
+
+patty()
+
+def Breads(double_patty):
+    def adding_pattys(arg1,arg2):
+        print ("Bread")
+        double_patty(arg1,arg2)
+        print ("Bread")
+    return adding_pattys
+
+@Breads
+def double_patty(meat1,meat2):
+    print (meat1)
+    print (meat2)
+    
+double_patty('Chicken','Bacon')
